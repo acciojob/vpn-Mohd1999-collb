@@ -14,7 +14,7 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private Country country;
+    private CountryName countryName;
 
     private String code;
 
@@ -28,10 +28,10 @@ public class Country {
 
     public Country(){}
 
-    public Country(int id, String code, Country country, ServiceProvider serviceProvider, User user){
+    public Country(int id, String code, CountryName countryName, ServiceProvider serviceProvider, User user){
         this.id = id;
         this.code = code;
-        this.country = country;
+        this.countryName = countryName;
         this.serviceProvider = serviceProvider;
         this.user = user;
     }
@@ -61,12 +61,12 @@ public class Country {
         return code;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setCountryName(CountryName countryName) {
+        this.countryName = countryName;
     }
-
-    public Country getCountry() {
-        return country;
+    
+    public CountryName getCountryName() {
+        return countryName;
     }
 
     public void setServiceProvider(ServiceProvider serviceProvider) {
@@ -75,8 +75,5 @@ public class Country {
 
     public ServiceProvider getServiceProvider() {
         return serviceProvider;
-    }
-
-
-    
+    }    
 }

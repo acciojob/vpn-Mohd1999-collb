@@ -1,6 +1,6 @@
 package com.driver.services.impl;
 
-import com.driver.model.Admin;
+import com.driver.model.*;
 import com.driver.model.ServiceProvider;
 import com.driver.repository.AdminRepository;
 import com.driver.repository.CountryRepository;
@@ -79,7 +79,7 @@ public class AdminServiceImpl implements AdminService {
 
         // saving all entities and updating foreign keys
         country.setServiceProvider(serviceProvider);
-        serviceProvider.getCountryList().add(country);
+        serviceProvider.getCountries().add(country);
         serviceProviderRepository1.save(serviceProvider);
         return serviceProvider;
     }

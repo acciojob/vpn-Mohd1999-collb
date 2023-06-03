@@ -41,5 +41,13 @@ public class Connection {
     public ServiceProvider getServiceProvider() {
         return serviceProvider;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
     
 }

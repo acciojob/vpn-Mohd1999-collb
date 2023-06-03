@@ -3,6 +3,8 @@ package com.driver.model;
 import javax.annotation.processing.Generated;
 import javax.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="User")
 public class User {
@@ -19,11 +21,13 @@ public class User {
     private String maskedIp;
 
     Boolean connected;
+    
 
-    @JoinColumn(mappedBy="user", cascade = CascadeType.ALL)
+    
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     List<Connection> connections = new ArrayList<>();
 
-    @JoinColumn(mappedBy="user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy="user", cascade = CascadeType.ALL)
     Country country;
 
     @ManyToMany
