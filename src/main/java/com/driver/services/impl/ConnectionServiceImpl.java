@@ -63,7 +63,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         if(user.getMaskedIp()!=null){
             throw new Exception("Already connected");
         }
-        else if(countryName.equalsIgnoreCase(user.getCountry().getCoun.toString())){
+        else if(countryName.equalsIgnoreCase(user.getCountry().getCountryName().toString())){
             return user;
         }
         else {
@@ -92,7 +92,7 @@ public class ConnectionServiceImpl implements ConnectionService {
             }
             if (serviceProvider!=null){
                 Connection connection = new Connection();
-                connection.setUsers(user);
+                connection.setUser(user);
                 connection.setServiceProvider(serviceProvider);
 
                 String cc = country.getCode();

@@ -1,6 +1,6 @@
 package com.driver.model;
 
-import java.util.List;
+import java.util.*;;
 
 import javax.persistence.*;
 import javax.annotation.processing.Generated;
