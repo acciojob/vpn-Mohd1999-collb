@@ -34,6 +34,8 @@
 // }
 
 
+
+
 package com.driver.services.impl;
 
 import com.driver.services.ConnectionService;
@@ -63,7 +65,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         if(user.getMaskedIp()!=null){
             throw new Exception("Already connected");
         }
-        else if(countryName.equalsIgnoreCase(user.getCountry().getCountryName().toString())){
+        else if(countryName.equalsIgnoreCase(user.getOriginalCountry().getCountryName().toString())){
             return user;
         }
         else {
@@ -78,7 +80,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 
             for(ServiceProvider serviceProvider1:serviceProviderList){
 
-                List<Country> countryList = serviceProvider1.getCountries();
+                List<Country> countryList = serviceProvider1.getCountryList();
 
 
                 for (Country country1: countryList){
@@ -101,9 +103,9 @@ public class ConnectionServiceImpl implements ConnectionService {
 
                 user.setMaskedIp(mask);
                 user.setConnected(true);
-                user.getConnections().add(connection);
+                user.getConnectionList().add(connection);
 
-                serviceProvider.getConnections().add(connection);
+                serviceProvider.getConnectionList().add(connection);
 
                 userRepository2.save(user);
                 serviceProviderRepository2.save(serviceProvider);
@@ -133,51 +135,42 @@ public class ConnectionServiceImpl implements ConnectionService {
             String str = user1.getMaskedIp();
             String cc = str.substring(0,3); //chopping country code = cc
 
-            if(cc.equals(user.getCountry().getCode())){
+            if(cc.equals(user.getOriginalCountry().getCode()))
                 return user;
-            } else {
+            else {
                 String countryName = "";
 
-                if (cc.equalsIgnoreCase(CountryName.IND.toCode())){
+                if (cc.equalsIgnoreCase(CountryName.IND.toCode()))
                     countryName = CountryName.IND.toString();
-                }
-                if (cc.equalsIgnoreCase(CountryName.USA.toCode())){
+                if (cc.equalsIgnoreCase(CountryName.USA.toCode()))
                     countryName = CountryName.USA.toString();
-                }
-
-                if (cc.equalsIgnoreCase(CountryName.JPN.toCode())){
+                if (cc.equalsIgnoreCase(CountryName.JPN.toCode()))
                     countryName = CountryName.JPN.toString();
-                }
-
-                if (cc.equalsIgnoreCase(CountryName.CHI.toCode())){
+                if (cc.equalsIgnoreCase(CountryName.CHI.toCode()))
                     countryName = CountryName.CHI.toString();
-                }
-
-                if (cc.equalsIgnoreCase(CountryName.AUS.toCode())){
+                if (cc.equalsIgnoreCase(CountryName.AUS.toCode()))
                     countryName = CountryName.AUS.toString();
-                }
 
                 User user2 = connect(senderId,countryName);
                 if (!user2.getConnected()){
                     throw new Exception("Cannot establish communication");
 
-                }else {
-                    return user2;
                 }
+                else return user2;
             }
 
         }
         else{
-            if(user1.getCountry().equals(user.getCountry())){
+            if(user1.getOriginalCountry().equals(user.getOriginalCountry())){
                 return user;
             }
-            String countryName = user1.getCountry().getCountryName().toString();
+            String countryName = user1.getOriginalCountry().getCountryName().toString();
             User user2 =  connect(senderId,countryName);
             if (!user2.getConnected()){
                 throw new Exception("Cannot establish communication");
-            } else {
-                return user2;
             }
+            else return user2;
+
         }
     }
 }
